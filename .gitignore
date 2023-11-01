@@ -1,0 +1,7 @@
+*
+!override/
+!override/**
+!.gitignore
+!*.env.example
+!docker-compose.yml
+!LICENCE
