@@ -19,8 +19,11 @@ services:
       - SETGID
       - SETUID
       - DAC_OVERRIDE
-    networks:
-      - searxng-network
+    healthcheck:
+      test: redis-cli ping | grep PONG
+      interval: 1m
+      start_period: 10s
+      timeout: 5s
 
   searxng:
     image: docker.io/searxng/searxng:latest
@@ -43,16 +46,10 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: 1m
-        max-file: "1"
+        max_size: 1m
+        max_file: 1
     depends_on:
       - redis
-    networks:
-      - searxng-network
 
 volumes:
   searxng-redis:
-    driver: local
-
-networks:
-  searxng-network:
