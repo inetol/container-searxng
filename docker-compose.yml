@@ -13,6 +13,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - searxng-redis:/data
+    security_opt:
+      - no-new-privileges:true
     cap_drop:
       - ALL
     cap_add:
@@ -37,6 +39,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /opt/searxng-data:/etc/searxng
       - ./override/usr/local/searxng/searx/static/themes/simple/img:/usr/local/searxng/searx/static/themes/simple/img
+    security_opt:
+      - no-new-privileges:true
     cap_drop:
       - ALL
     cap_add:
