@@ -24,7 +24,7 @@ services:
     healthcheck:
       test: redis-cli ping | grep PONG
       interval: 1m
-      start_period: 10s
+      start_period: 30s
       timeout: 5s
 
   searxng:
@@ -33,6 +33,10 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:61010:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
     env_file:
       - ./.searxng.env
     volumes:
@@ -47,11 +51,6 @@ services:
       - CHOWN
       - SETGID
       - SETUID
-    logging:
-      driver: json-file
-      options:
-        max-size: 1m
-        max-file: 3
     depends_on:
       - redis
 
