@@ -42,6 +42,11 @@ services:
       - CHOWN
       - SETGID
       - SETUID
+    logging:
+      driver: local
+      options:
+        max-size: 10m
+        max-file: 3
     depends_on:
       - redis
 
