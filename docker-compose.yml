@@ -1,17 +1,14 @@
-version: "3.8"
-
 services:
   redis:
-    image: docker.io/library/redis:7.2-alpine
+    image: docker.io/library/redis:7-alpine
     container_name: searxng-redis
     restart: unless-stopped
     entrypoint: redis-server --save 30 1 --loglevel warning
     deploy:
       resources:
         limits:
-          memory: 128M
+          memory: 64M
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - searxng-redis:/data
     security_opt:
       - no-new-privileges:true
@@ -21,11 +18,6 @@ services:
       - SETGID
       - SETUID
       - DAC_OVERRIDE
-    healthcheck:
-      test: redis-cli ping | grep PONG
-      interval: 1m
-      start_period: 30s
-      timeout: 5s
 
   searxng:
     image: docker.io/searxng/searxng:latest
@@ -40,8 +32,7 @@ services:
     env_file:
       - ./.searxng.env
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /opt/searxng-data:/etc/searxng
+      - ~/searxng/config:/etc/searxng
       - ./override/usr/local/searxng/searx/static/themes/simple/img:/usr/local/searxng/searx/static/themes/simple/img
     security_opt:
       - no-new-privileges:true
