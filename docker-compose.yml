@@ -32,7 +32,7 @@ services:
     env_file:
       - ./.searxng.env
     volumes:
-      - ~/searxng/config:/etc/searxng
+      - ~/portal/searxng-config:/etc/searxng
       - ./override/usr/local/searxng/searx/static/themes/simple/img:/usr/local/searxng/searx/static/themes/simple/img
     security_opt:
       - no-new-privileges:true
@@ -43,9 +43,9 @@ services:
       - SETGID
       - SETUID
     logging:
-      driver: local
+      driver: json-file
       options:
-        max-size: 10m
+        max-size: 5m
         max-file: 3
     depends_on:
       - redis
