@@ -1,0 +1,15 @@
+[Container]
+Image=cgr.dev/chainguard/redis:latest
+ContainerName=searxng-redis
+Network=searxng.network
+Volume=redis:/data
+AutoUpdate=registry
+NoNewPrivileges=true
+
+[Unit]
+PartOf=searxng.service
+
+[Service]
+Restart=always
+RestartSec=5
+TimeoutStartSec=300
