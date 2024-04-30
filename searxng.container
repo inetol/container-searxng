@@ -9,8 +9,8 @@ AutoUpdate=registry
 NoNewPrivileges=true
 
 [Unit]
-Requires=redis.service
-After=redis.service
+Requires=valkey.service
+After=valkey.service
 
 [Service]
 Restart=always

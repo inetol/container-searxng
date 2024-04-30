@@ -1,13 +1,10 @@
 [Container]
-Image=cgr.dev/chainguard/redis:latest
-ContainerName=searxng-redis
+Image=cgr.dev/chainguard/valkey:latest
+ContainerName=searxng-valkey
 Network=searxng.network
-Volume=redis:/data
+Volume=searxng-valkey:/data
 AutoUpdate=registry
 NoNewPrivileges=true
-
-[Unit]
-PartOf=searxng.service
 
 [Service]
 Restart=always

@@ -2,6 +2,6 @@
 !.env.searxng.example
 !.gitignore
 !README
-!redis.container
 !searxng.container
 !searxng.network
+!valkey.container
